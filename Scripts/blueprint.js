@@ -1739,13 +1739,13 @@ class Blueprint {
       for (let outputItem of subRecipe.output) {
         let actual_rate =
           outputItem.rate * productionSpeed * actual_building_num * extra_rate;
-        let sorter = buildingMap.sorterMk1;
-        if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
+        let sorter = buildingMap.sorterMk3;
+        if (this.config.onlySorterMk4 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器，二级分拣器没太大价值，直接略过
-          sorter = buildingMap.sorterMk3;
+          sorter = buildingMap.sorterMk4;
         }
         if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
-          actual_rate > buildingMap.sorterMk3.sortingSpeed
+          actual_rate > buildingMap.sorterMk4.sortingSpeed
         ) {
           // 研究站层数过高时会出现一个3级分拣器无法满足运力的问题
           let newSorter2 = this.getBuildingTemplate();
