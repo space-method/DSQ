@@ -1745,6 +1745,63 @@ class Blueprint {
           sorter = buildingMap.sorterMk3;
         }
 
+        let newSorter = this.getBuildingTemplate();
+        newSorter.itemId = sorter.itemId;
+        newSorter.modelIndex = sorter.modelIndex;
+        newSorter.inputObjIdx = nowBuildingIndex;
+        newSorter.outputToSlot = -1;
+        newSorter.inputToSlot = 1;
+        newSorter.inputFromSlot = slotIndex;
+        newSorter.filterId = itemMap[outputItem.name].iconId;
+        newSorter.parameters = { length: 1 };
+        const offsetInfo = this.calculateSorterLocalOffsetAndYaw(
+          { x: buildingX, y: buildingY, z: buildingZ },
+          buildingMap[subRecipe.building.name].category,
+          slotIndex
+        );
+        newSorter.localOffset = offsetInfo.offset;
+        newSorter.yaw = offsetInfo.yaw;
+        this.buildings.push(newSorter);
+        sorterList.push(this.buildingIndex);
+        // this.buildingArray[this.buildingArray.length-1].push({index: this.buildingIndex, type: buildingType.sorter})
+        if (this.sorters[outputItem.name]) {
+          // 已存在就append
+          if (this.sorters[outputItem.name].output) {
+            this.sorters[outputItem.name].output.push({
+              index: newSorter.index,
+              rate: actual_rate,
+              ownerObjIdx: nowBuildingIndex, // 分拣器附属生产建筑的index
+              ownerName: subRecipe.building.name,
+              ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
+              recipeID: parseInt(subRecipe.recipeID),
+            });
+          } else {
+            this.sorters[outputItem.name].output = [
+              {
+                index: newSorter.index,
+                rate: actual_rate,
+                ownerObjIdx: nowBuildingIndex,
+                ownerName: subRecipe.building.name,
+                ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
+                recipeID: parseInt(subRecipe.recipeID),
+              },
+            ];
+          }
+        } else {
+          // 不存在就新建
+          this.sorters[outputItem.name] = {
+            output: [
+              {
+                index: newSorter.index,
+                rate: actual_rate,
+                ownerObjIdx: nowBuildingIndex,
+                ownerName: subRecipe.building.name,
+                ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
+                recipeID: parseInt(subRecipe.recipeID),
+              },
+            ],
+          };
+        }
         slotIndex--;
         if (!this.config.compactLayout) {
           // 非紧凑布局，调整对撞机的分拣器连接点
