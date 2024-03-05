@@ -1740,9 +1740,9 @@ class Blueprint {
         let actual_rate =
           outputItem.rate * productionSpeed * actual_building_num * extra_rate;
         let sorter = buildingMap.sorterMk3;
-        if (this.config.onlySorterMk4 || actual_rate > sorter.sortingSpeed) {
+        if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器，二级分拣器没太大价值，直接略过
-          sorter = buildingMap.sorterMk4;
+          sorter = buildingMap.sorterMk3;
         }
         if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
           actual_rate > buildingMap.sorterMk4.sortingSpeed
