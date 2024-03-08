@@ -1744,6 +1744,10 @@ class Blueprint {
           // 一级分拣器不够用时直接使用三级分拣器，二级分拣器没太大价值，直接略过
           sorter = buildingMap.sorterMk3;
         }
+	if (this.config.onlySorterMk3 || actual_rate > sorterMk3.sortingSpeed) {
+          // 一级分拣器不够用时直接使用三级分拣器
+          sorter = buildingMap.sorterMk4;
+        }
 
         let newSorter = this.getBuildingTemplate();
         newSorter.itemId = sorter.itemId;
@@ -1825,6 +1829,10 @@ class Blueprint {
         if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
           sorter = buildingMap.sorterMk3;
+        }
+	if (this.config.onlySorterMk3 || actual_rate > sorterMk3.sortingSpeed) {
+          // 一级分拣器不够用时直接使用三级分拣器
+          sorter = buildingMap.sorterMk4;
         }
 
         if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
