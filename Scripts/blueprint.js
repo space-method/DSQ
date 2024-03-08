@@ -1745,7 +1745,7 @@ class Blueprint {
           sorter = buildingMap.sorterMk4;
         }
         if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
-          actual_rate > buildingMap.sorterMk3.sortingSpeed
+          actual_rate > buildingMap.sorterMk4.sortingSpeed
         ) {
           // 研究站层数过高时会出现一个3级分拣器无法满足运力的问题
           let newSorter2 = this.getBuildingTemplate();
