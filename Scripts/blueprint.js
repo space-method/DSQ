@@ -1744,12 +1744,12 @@ class Blueprint {
           // 默认三级，不够四级
         //  sorter = buildingMap.sorterMk4;
         //}
-        if (
-          actual_rate > buildingMap.sorterMk3.sortingSpeed
-        ) {
+        //if (
+        //  actual_rate > buildingMap.sorterMk3.sortingSpeed
+        //) {
           // 研究站层数过高时会出现一个3级分拣器无法满足运力的问题
-          sorter = buildingMap.sorterMk4;
-        }												
+        //  sorter = buildingMap.sorterMk4;
+        //}												
 
 
         let newSorter = this.getBuildingTemplate();
@@ -1833,10 +1833,10 @@ class Blueprint {
           // 一级分拣器不够用时直接使用三级分拣器
           sorter = buildingMap.sorterMk3;
         }
-	if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
+	//if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
-          sorter = buildingMap.sorterMk4;
-        }
+        //  sorter = buildingMap.sorterMk4;
+        //}
 
         if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
           actual_rate > buildingMap.sorterMk4.sortingSpeed
