@@ -1740,72 +1740,16 @@ class Blueprint {
         let actual_rate =
           outputItem.rate * productionSpeed * actual_building_num * extra_rate;
         let sorter = buildingMap.sorterMk3;
-        if (actual_rate > buildingMap.sorterMk3.sortingSpeed) {
+        //if (actual_rate > buildingMap.sorterMk3.sortingSpeed) {
           // 默认三级，不够四级
-          sorter = buildingMap.sorterMk4;
-        }
-        if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
-          actual_rate > buildingMap.sorterMk4.sortingSpeed
+        //  sorter = buildingMap.sorterMk4;
+        //}
+        if (
+          actual_rate > buildingMap.sorterMk3.sortingSpeed
         ) {
           // 研究站层数过高时会出现一个3级分拣器无法满足运力的问题
-          let newSorter2 = this.getBuildingTemplate();
-          newSorter2.itemId = sorter.itemId;
-          newSorter2.modelIndex = sorter.modelIndex;
-          newSorter2.inputObjIdx = nowBuildingIndex;
-          newSorter2.outputToSlot = -1;
-          newSorter2.inputToSlot = 1;
-          newSorter2.inputFromSlot = slotIndex - 3;
-          newSorter2.filterId = itemMap[outputItem.name].iconId;
-          newSorter2.parameters = { length: 1 };
-          const offsetInfo2 = this.calculateSorterLocalOffsetAndYaw(
-            { x: buildingX, y: buildingY, z: buildingZ },
-            buildingMap[subRecipe.building.name].category,
-            slotIndex - 3
-          );
-          newSorter2.localOffset = offsetInfo2.offset;
-          newSorter2.yaw = offsetInfo2.yaw;
-          this.buildings.push(newSorter2);
-          sorterList.push(this.buildingIndex);
-          if (this.sorters[outputItem.name]) {
-            // 已存在就append
-            if (this.sorters[outputItem.name].output) {
-              this.sorters[outputItem.name].output.push({
-                index: newSorter2.index,
-                rate: buildingMap.sorterMk3.sortingSpeed,
-                ownerObjIdx: nowBuildingIndex, // 分拣器附属生产建筑的index
-                ownerName: subRecipe.building.name,
-                ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
-                recipeID: parseInt(subRecipe.recipeID),
-              });
-            } else {
-              this.sorters[outputItem.name].output = [
-                {
-                  index: newSorter2.index,
-                  rate: buildingMap.sorterMk3.sortingSpeed,
-                  ownerObjIdx: nowBuildingIndex,
-                  ownerName: subRecipe.building.name,
-                  ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
-                  recipeID: parseInt(subRecipe.recipeID),
-                },
-              ];
-            }
-          } else {
-            // 不存在就新建
-            this.sorters[outputItem.name] = {
-              output: [
-                {
-                  index: newSorter2.index,
-                  rate: buildingMap.sorterMk3.sortingSpeed,
-                  ownerObjIdx: nowBuildingIndex,
-                  ownerName: subRecipe.building.name,
-                  ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
-                  recipeID: parseInt(subRecipe.recipeID),
-                },
-              ],
-            };
-          }
-          actual_rate -= buildingMap.sorterMk3.sortingSpeed;
-        }														
+          sorter = buildingMap.sorterMk4;
+        }												
 
 
         let newSorter = this.getBuildingTemplate();
