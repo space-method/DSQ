@@ -1831,7 +1831,7 @@ class Blueprint {
         let sorter = buildingMap.sorterMk1;
         if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
-          sorter = buildingMap.sorterMk4;
+          sorter = buildingMap.sorterMk3;
         }
 	//if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
@@ -1865,7 +1865,7 @@ class Blueprint {
             if (this.sorters[inputItem.name].output) {
               this.sorters[inputItem.name].output.push({
                 index: newSorter2.index,
-                rate: buildingMap.sorterMk4.sortingSpeed,
+                rate: buildingMap.sorterMk3.sortingSpeed,
                 ownerObjIdx: nowBuildingIndex, // 分拣器附属生产建筑的index
                 ownerName: subRecipe.building.name,
                 ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
@@ -1875,7 +1875,7 @@ class Blueprint {
               this.sorters[inputItem.name].output = [
                 {
                   index: newSorter2.index,
-                  rate: buildingMap.sorterMk4.sortingSpeed,
+                  rate: buildingMap.sorterMk3.sortingSpeed,
                   ownerObjIdx: nowBuildingIndex,
                   ownerName: subRecipe.building.name,
                   ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
@@ -1889,7 +1889,7 @@ class Blueprint {
               output: [
                 {
                   index: newSorter2.index,
-                  rate: buildingMap.sorterMk4.sortingSpeed,
+                  rate: buildingMap.sorterMk3.sortingSpeed,
                   ownerObjIdx: nowBuildingIndex,
                   ownerName: subRecipe.building.name,
                   ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
@@ -1898,7 +1898,7 @@ class Blueprint {
               ],
             };
           }
-          actual_rate -= buildingMap.sorterMk4.sortingSpeed;
+          actual_rate -= buildingMap.sorterMk3.sortingSpeed;
         }
 
         let newSorter = this.getBuildingTemplate();
