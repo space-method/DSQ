@@ -83,7 +83,7 @@ const itemMap = {
     sorterMk1: { name: "sorterMk1", iconId: 2011, remark: "分拣器" },
     sorterMk2: { name: "sorterMk2", iconId: 2012, remark: "高速分拣器" },
     sorterMk3: { name: "sorterMk3", iconId: 2013, remark: "极速分拣器" },
-	sorterMk4: { name: "sorterMk4", iconId: 2014, remark: "集装分拣器" },
+    sorterMk4: { name: "sorterMk4", iconId: 2014, remark: "集装分拣器" },
     splitter: { name: "splitter", iconId: 2020, remark: "四向分流器" },
     autoPiler: { name: "autoPiler", iconId: 2040, remark: "自动集装机" },
     trafficMonitor: { name: "trafficMonitor", iconId: 2030, remark: "流速监测器" },
@@ -1831,7 +1831,7 @@ class Blueprint {
         let sorter = buildingMap.sorterMk1;
         if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
-          sorter = buildingMap.sorterMk3;
+          sorter = buildingMap.sorterMk4;
         }
 	//if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
@@ -1865,7 +1865,7 @@ class Blueprint {
             if (this.sorters[inputItem.name].output) {
               this.sorters[inputItem.name].output.push({
                 index: newSorter2.index,
-                rate: buildingMap.sorterMk3.sortingSpeed,
+                rate: buildingMap.sorterMk4.sortingSpeed,
                 ownerObjIdx: nowBuildingIndex, // 分拣器附属生产建筑的index
                 ownerName: subRecipe.building.name,
                 ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
@@ -1875,7 +1875,7 @@ class Blueprint {
               this.sorters[inputItem.name].output = [
                 {
                   index: newSorter2.index,
-                  rate: buildingMap.sorterMk3.sortingSpeed,
+                  rate: buildingMap.sorterMk4.sortingSpeed,
                   ownerObjIdx: nowBuildingIndex,
                   ownerName: subRecipe.building.name,
                   ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
@@ -1889,7 +1889,7 @@ class Blueprint {
               output: [
                 {
                   index: newSorter2.index,
-                  rate: buildingMap.sorterMk3.sortingSpeed,
+                  rate: buildingMap.sorterMk4.sortingSpeed,
                   ownerObjIdx: nowBuildingIndex,
                   ownerName: subRecipe.building.name,
                   ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
@@ -1898,7 +1898,7 @@ class Blueprint {
               ],
             };
           }
-          actual_rate -= buildingMap.sorterMk3.sortingSpeed;
+          actual_rate -= buildingMap.sorterMk4.sortingSpeed;
         }
 
         let newSorter = this.getBuildingTemplate();
