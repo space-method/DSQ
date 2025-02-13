@@ -1831,75 +1831,76 @@ class Blueprint {
         let sorter = buildingMap.sorterMk1;
         if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
-          sorter = buildingMap.sorterMk3;
+          let sorter = buildingMap.sorterMk4;
         }
 	//if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
         //  sorter = buildingMap.sorterMk4;
         //}
 
-        if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
-          actual_rate > buildingMap.sorterMk4.sortingSpeed
-        ) {
-          // 研究站层数过高时会出现一个3级分拣器无法满足运力的问题
-          let newSorter2 = this.getBuildingTemplate();
-          newSorter2.itemId = sorter.itemId;
-          newSorter2.modelIndex = sorter.modelIndex;
-          newSorter2.inputObjIdx = nowBuildingIndex;
-          newSorter2.outputToSlot = slotIndex - 3;
-          newSorter2.inputToSlot = 1;
-          newSorter2.filterId = itemMap[inputItem.name].iconId;
-          newSorter2.parameters = { length: 1 };
-          const offsetInfo2 = this.calculateSorterLocalOffsetAndYaw(
-            { x: buildingX, y: buildingY, z: buildingZ },
-            buildingMap[subRecipe.building.name].category,
-            slotIndex - 3,
-            1
-          );
-          newSorter2.localOffset = offsetInfo2.offset;
-          newSorter2.yaw = offsetInfo2.yaw;
-          this.buildings.push(newSorter2);
-          sorterList.push(this.buildingIndex);
-          if (this.sorters[inputItem.name]) {
-            // 已存在就append
-            if (this.sorters[inputItem.name].output) {
-              this.sorters[inputItem.name].output.push({
-                index: newSorter2.index,
-                rate: buildingMap.sorterMk3.sortingSpeed,
-                ownerObjIdx: nowBuildingIndex, // 分拣器附属生产建筑的index
-                ownerName: subRecipe.building.name,
-                ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
-                recipeID: parseInt(subRecipe.recipeID),
-              });
-            } else {
-              this.sorters[inputItem.name].output = [
-                {
-                  index: newSorter2.index,
-                  rate: buildingMap.sorterMk3.sortingSpeed,
-                  ownerObjIdx: nowBuildingIndex,
-                  ownerName: subRecipe.building.name,
-                  ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
-                  recipeID: parseInt(subRecipe.recipeID),
-                },
-              ];
-            }
-          } else {
-            // 不存在就新建
-            this.sorters[inputItem.name] = {
-              output: [
-                {
-                  index: newSorter2.index,
-                  rate: buildingMap.sorterMk3.sortingSpeed,
-                  ownerObjIdx: nowBuildingIndex,
-                  ownerName: subRecipe.building.name,
-                  ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
-                  recipeID: parseInt(subRecipe.recipeID),
-                },
-              ],
-            };
-          }
-          actual_rate -= buildingMap.sorterMk3.sortingSpeed;
-        }
+        // if (buildingMap[subRecipe.building.name].category === productionCategory.lab &&
+        //   actual_rate > buildingMap.sorterMk3.sortingSpeed
+        // ) 
+        // {
+        //   // 研究站层数过高时会出现一个3级分拣器无法满足运力的问题
+        //   let newSorter2 = this.getBuildingTemplate();
+        //   newSorter2.itemId = sorter.itemId;
+        //   newSorter2.modelIndex = sorter.modelIndex;
+        //   newSorter2.inputObjIdx = nowBuildingIndex;
+        //   newSorter2.outputToSlot = -1;
+        //   newSorter2.inputToSlot = 1;
+        //   newSorter2.inputFromSlot = slotIndex - 3;
+        //   newSorter2.filterId = itemMap[outputItem.name].iconId;
+        //   newSorter2.parameters = { length: 1 };
+        //   const offsetInfo2 = this.calculateSorterLocalOffsetAndYaw(
+        //     { x: buildingX, y: buildingY, z: buildingZ },
+        //     buildingMap[subRecipe.building.name].category,
+        //     slotIndex - 3
+        //   );
+        //   newSorter2.localOffset = offsetInfo2.offset;
+        //   newSorter2.yaw = offsetInfo2.yaw;
+        //   this.buildings.push(newSorter2);
+        //   sorterList.push(this.buildingIndex);
+        //   if (this.sorters[outputItem.name]) {
+        //     // 已存在就append
+        //     if (this.sorters[outputItem.name].output) {
+        //       this.sorters[outputItem.name].output.push({
+        //         index: newSorter2.index,
+        //         rate: buildingMap.sorterMk3.sortingSpeed,
+        //         ownerObjIdx: nowBuildingIndex, // 分拣器附属生产建筑的index
+        //         ownerName: subRecipe.building.name,
+        //         ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
+        //         recipeID: parseInt(subRecipe.recipeID),
+        //       });
+        //     } else {
+        //       this.sorters[outputItem.name].output = [
+        //         {
+        //           index: newSorter2.index,
+        //           rate: buildingMap.sorterMk3.sortingSpeed,
+        //           ownerObjIdx: nowBuildingIndex,
+        //           ownerName: subRecipe.building.name,
+        //           ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
+        //           recipeID: parseInt(subRecipe.recipeID),
+        //         },
+        //       ];
+        //     }
+        //   } else {
+        //     // 不存在就新建
+        //     this.sorters[outputItem.name] = {
+        //       output: [
+        //         {
+        //           index: newSorter2.index,
+        //           rate: buildingMap.sorterMk3.sortingSpeed,
+        //           ownerObjIdx: nowBuildingIndex,
+        //           ownerName: subRecipe.building.name,
+        //           ownerOffset: { x: buildingX, y: buildingY, z: buildingZ },
+        //           recipeID: parseInt(subRecipe.recipeID),
+        //         },
+        //       ],
+        //     };
+        //   }
+        //   actual_rate -= buildingMap.sorterMk3.sortingSpeed;
+        // }
 
         let newSorter = this.getBuildingTemplate();
         newSorter.itemId = sorter.itemId;
