@@ -1828,10 +1828,10 @@ class Blueprint {
           // 加速时原料也要加速；增产时则不需要
           actual_rate *= extra_rate;
         }
-        let sorter = buildingMap.sorterMk1;
+        let sorter = buildingMap.sorterMk3;
         if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
-          sorter = buildingMap.sorterMk4;
+          let sorter = buildingMap.sorterMk4;
         }
 	//if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
