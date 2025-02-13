@@ -1831,7 +1831,7 @@ class Blueprint {
         let sorter = buildingMap.sorterMk1;
         if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
-          let sorter = buildingMap.sorterMk4;
+          sorter = buildingMap.sorterMk4;
         }
 	//if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
