@@ -6544,32 +6544,78 @@ function generateBlueprint() {
     outputRecipe,
     config
   );
-  b1.init();
-  b1.generateBuildings();
-  b1.generateConveyorBelts();
-  b1.generateConveyorBeltsForSprayCoater();
-  b1.blueprintTemplate.buildings = b1.buildings;
-  b1.blueprintTemplate.header.desc = recipe.blueprintDesc.trimEnd();
-  switch (recipe.blueprintIcon.length) {
-    case 1:
-      b1.blueprintTemplate.header.layout = 10;
-      break;
-    case 2:
-      b1.blueprintTemplate.header.layout = 20;
-      break;
-    case 3:
-      b1.blueprintTemplate.header.layout = 30;
-      break;
-    case 4:
-      b1.blueprintTemplate.header.layout = 40;
-      break;
-    default:
-      b1.blueprintTemplate.header.layout = 51;
-      break;
-  }
-  navigator.clipboard
-    .writeText(b1.toStr())
-    .then((r) => cocoMessage.success("已复制到粘贴板", 1000));
+  try {
+    b1.init();
+    b1.generateBuildings();
+    b1.generateConveyorBelts();
+    b1.generateConveyorBeltsForSprayCoater();
+    b1.blueprintTemplate.buildings = b1.buildings;
+    b1.blueprintTemplate.header.desc = recipe.blueprintDesc.trimEnd();
+
+    switch (recipe.blueprintIcon.length) {
+        case 1:
+            b1.blueprintTemplate.header.layout = 10;
+            break;
+        case 2:
+            b1.blueprintTemplate.header.layout = 20;
+            break;
+        case 3:
+            b1.blueprintTemplate.header.layout = 30;
+            break;
+        case 4:
+            b1.blueprintTemplate.header.layout = 40;
+            break;
+        default:
+            b1.blueprintTemplate.header.layout = 51;
+            break;
+    }
+
+    const textToCopy = b1.toStr();
+    if (typeof textToCopy === "string" && textToCopy.trim() !== "") {
+        navigator.clipboard
+            .writeText(textToCopy)
+            .then(() => {
+                cocoMessage.success("已复制到粘贴板", 1000);
+            })
+            .catch((error) => {
+                console.error("复制到剪贴板失败:", error);
+                cocoMessage.error("复制到剪贴板失败", 1000);
+            });
+    } else {
+        console.error("无效的复制内容:", textToCopy);
+        cocoMessage.error("无法生成有效的复制内容", 1000);
+    }
+} catch (error) {
+    console.error("代码执行过程中出现错误:", error);
+    cocoMessage.error("代码执行过程中出现错误", 1000);
+}
+
+  // b1.init();
+  // b1.generateBuildings();
+  // b1.generateConveyorBelts();
+  // b1.generateConveyorBeltsForSprayCoater();
+  // b1.blueprintTemplate.buildings = b1.buildings;
+  // b1.blueprintTemplate.header.desc = recipe.blueprintDesc.trimEnd();
+  // switch (recipe.blueprintIcon.length) {
+  //   case 1:
+  //     b1.blueprintTemplate.header.layout = 10;
+  //     break;
+  //   case 2:
+  //     b1.blueprintTemplate.header.layout = 20;
+  //     break;
+  //   case 3:
+  //     b1.blueprintTemplate.header.layout = 30;
+  //     break;
+  //   case 4:
+  //     b1.blueprintTemplate.header.layout = 40;
+  //     break;
+  //   default:
+  //     b1.blueprintTemplate.header.layout = 51;
+  //     break;
+  // }
+  // navigator.clipboard
+  //   .writeText(b1.toStr())
+  //   .then((r) => cocoMessage.success("已复制到粘贴板", 1000));
   // navigator.clipboard.writeText(JSON.stringify(b1.blueprintTemplate.buildings)).then(r => cocoMessage.success("已复制到粘贴板", 1000))
 }
 
