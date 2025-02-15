@@ -352,7 +352,7 @@ const buildingMap = {
   sorterMk4: {
     name: "sorterMk4",
     itemId: 2014,
-    modelIndex: 43,
+    modelIndex: 483,
     sortingSpeed: 30,
     size: { x: 1, y: 1 },
     type: buildingType.sorter,
@@ -1831,7 +1831,7 @@ class Blueprint {
         let sorter = buildingMap.sorterMk3;
          if (this.config.onlySorterMk3 || actual_rate > sorter.sortingSpeed) {
            一级分拣器不够用时直接使用三级分拣器
-           sorter = buildingMap.sorterMk4;
+           sorter = buildingMap.sorterMk3;
          }
 	//if (actual_rate > buildingMap.sorterMk4.sortingSpeed) {
           // 一级分拣器不够用时直接使用三级分拣器
