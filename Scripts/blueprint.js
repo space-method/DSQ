@@ -352,8 +352,8 @@ const buildingMap = {
   sorterMk4: {
     name: "sorterMk4",
     itemId: 2014,
-    modelIndex: 483,
-    sortingSpeed: 9,
+    modelIndex: 43,
+    sortingSpeed: 30,
     size: { x: 1, y: 1 },
     type: buildingType.sorter,
     remark: "分拣器MK.Ⅳ",
