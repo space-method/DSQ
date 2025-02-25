@@ -6534,8 +6534,8 @@ function generateBlueprint() {
     teslaTowerLineInterval: parseInt(
       document.getElementById("teslaTowerLineInterval").value
     ), // 电线杆间隔几排
-    // onlyConveyorBeltMk3Downgrade: document.getElementById('onlyConveyorBeltMk3Downgrade').checked  // 三级传送带运力降级
-    onlyConveyorBeltMk3Downgrade: false, // 三级传送带运力降级
+    onlyConveyorBeltMk3Downgrade: document.getElementById('onlyConveyorBeltMk3Downgrade').checked  // 三级传送带运力降级
+    // onlyConveyorBeltMk3Downgrade: false, // 三级传送带运力降级
   };
   // console.log(config)
   let b1 = new Blueprint(
