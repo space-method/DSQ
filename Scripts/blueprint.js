@@ -2176,7 +2176,8 @@ class Blueprint {
         }
       }
 
-      let maxTransportSpeed = buildingMap.conveyorBeltMK3.transportSpeed;
+      let maxTransportSpeed = buildingMap.conveyorBeltMK3.transportSpeed *
+          this.config.conveyorBeltStackLayer;
       if (item.fromBuildingNum === 0) {
         // 只有原料可以堆叠，中间产物不支持堆叠
         maxTransportSpeed =
