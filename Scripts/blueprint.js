@@ -373,7 +373,7 @@ const buildingMap = {
     name: "conveyorBeltMK3",
     itemId: 2003,
     modelIndex: 37,
-    transportSpeed: 28,
+    transportSpeed: 29,
     size: { x: 1, y: 1 },
     type: buildingType.conveyor,
     remark: "传送带MK.Ⅲ",
